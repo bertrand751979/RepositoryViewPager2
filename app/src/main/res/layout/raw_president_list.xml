@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/material_card"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:strokeColor="@color/purple_500"
+        app:strokeWidth="1sp"
+        app:cardCornerRadius="14sp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/raw_president_name"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="Nom du President"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#70779E"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/raw_president_country"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:hint="Pays "
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#22284C"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/raw_btn_cancel"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:src="@drawable/ic_baseline_cancel_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"/>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

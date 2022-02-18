@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:strokeColor="#13433F"
+        app:strokeWidth="1sp"
+        app:cardCornerRadius="14sp"
+        android:layout_margin="3dp">
+
+        <TextView
+            android:id="@+id/raw_selection_president_name"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="Nom du President"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/teal_700"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/raw_selection_president_country"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:hint="Pays "
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
