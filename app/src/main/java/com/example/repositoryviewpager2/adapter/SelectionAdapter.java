@@ -14,14 +14,14 @@ import com.example.repositoryviewpager2.viewHolder.SelectionViewHolder;
 import java.util.ArrayList;
 
 public class SelectionAdapter extends RecyclerView.Adapter<SelectionViewHolder> {
-    private ArrayList<President>listSelections;
+    private ArrayList<President>listSelections = new ArrayList<>();
 
-    public SelectionAdapter(ArrayList<President> listSelections) {
-        this.listSelections = listSelections;
+    public SelectionAdapter() {
     }
 
     public void setListSelections(ArrayList<President> listSelections) {
         this.listSelections = listSelections;
+        notifyDataSetChanged();
     }
 
     @NonNull

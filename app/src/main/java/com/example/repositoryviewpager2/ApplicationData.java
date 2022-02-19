@@ -26,6 +26,14 @@ public class ApplicationData {
         return INSTANCE;
     }
 
+    public ArrayList<President> getMyPresidentList() {
+        return myPresidentList;
+    }
+
+    public void setMyPresidentList(ArrayList<President> myPresidentList) {
+        this.myPresidentList = myPresidentList;
+    }
+
     public President getPresidentItem() {
         return presidentItem;
     }
@@ -42,6 +50,16 @@ public class ApplicationData {
         this.presidentSortItem = presidentSortItem;
     }
 
+    public void add(President president){
+        myPresidentList.add(president);
+    }
+
+    public void delete(President president){
+        myPresidentList.remove(president);
+    }
+
+
+
     public void searchChoice(String countryName) {
         mySearchingList.clear();
         if (countryName.equals("")) {
@@ -53,12 +71,9 @@ public class ApplicationData {
                     ApplicationData.getInstance().setPresidentSortItem(president);
                     //Log.d("List ", String.valueOf(list.size()));
                     Log.d("List2 ", String.valueOf(mySearchingList.size()));
-
                 }
         }
     }
-
-
 
 
 

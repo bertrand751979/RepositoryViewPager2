@@ -9,14 +9,14 @@
       android:id="@+id/edit_name"
       android:layout_width="match_parent"
       android:textColorHint="@color/black"
-      android:textColor="@color/purple_700"
+      android:textColor="@color/teal_700"
       android:layout_height="wrap_content"
       android:hint="Saississez une ville"/>
 
   <EditText
       android:id="@+id/edit_country"
       android:textColorHint="@color/black"
-      android:textColor="@color/purple_700"
+      android:textColor="@color/teal_700"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="Saisissez un pays" />

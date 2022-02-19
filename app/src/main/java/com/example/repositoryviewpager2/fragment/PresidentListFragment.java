@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,11 +37,12 @@ public class PresidentListFragment extends Fragment {
     private Button btnToAdd;
     public static MenuItem itemSearch;
     public static MenuItem itemMenu;
+    private PresidentListFragmentViewModel viewModelPresident;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        President president1 = new President("Clinton", "USA");
+       President president1 = new President("Clinton", "USA");
         President president2 = new President("Eyadema", "TOGO");
         President president3 = new President("Olympio", "TOGO");
         President president4 = new President("Bush", "USA");
@@ -53,11 +56,14 @@ public class PresidentListFragment extends Fragment {
         ApplicationData.getInstance().myPresidentList.add(president5);
         ApplicationData.getInstance().myPresidentList.add(president6);
         ApplicationData.getInstance().myPresidentList.add(president7);
+        viewModelPresident = new ViewModelProvider(this).get(PresidentListFragmentViewModel.class);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        presidentAdapter.setListPresidents(ApplicationData.getInstance().myPresidentList);
+
     }
 
     @Nullable
@@ -77,7 +83,8 @@ public class PresidentListFragment extends Fragment {
         btnToAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addPresidentToList();
+                viewModelPresident.toAdd(new President(editPresidentName.getText().toString(),editPresidentCountry.getText().toString()));
+                Toast.makeText(PresidentListFragment.this.getContext(),"Ajouté",Toast.LENGTH_SHORT).show();
             }
         });
         setViewItem();
@@ -88,13 +95,20 @@ public class PresidentListFragment extends Fragment {
         OnImageCancelClickedAction onImageCancelClickedAction = new OnImageCancelClickedAction() {
             @Override
             public void deleteItem(President president) {
-                ApplicationData.getInstance().myPresidentList.remove(president);
-                presidentAdapter.setListPresidents(ApplicationData.getInstance().myPresidentList);
-                presidentAdapter.notifyDataSetChanged();
+                viewModelPresident.toDeleted(president);
+                Toast.makeText(PresidentListFragment.this.getContext(),"Supprimé",Toast.LENGTH_SHORT).show();
             }
         };
-        presidentAdapter = new PresidentAdapter(ApplicationData.getInstance().myPresidentList,onImageCancelClickedAction);
+        viewModelPresident.toPostMyListPresident();
+        presidentAdapter = new PresidentAdapter(onImageCancelClickedAction);
         recyclerView.setAdapter(presidentAdapter);
+        viewModelPresident.presidentLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<President>>() {
+            @Override
+            public void onChanged(ArrayList<President> presidents) {
+                presidentAdapter.setListPresidents(presidents);
+            }
+        });
+        viewModelPresident.toPostMyListPresident();
     }
 
     @Override
@@ -124,7 +138,7 @@ public class PresidentListFragment extends Fragment {
         alertDialog.show(fm, "fragment_alert");
     }
 
-    private void addPresidentToList(){
+   /* private void addPresidentToList(){
         President president = new President();
         president.setPresidentName(editPresidentName.getText().toString());
         president.setPresidentCountry(editPresidentCountry.getText().toString());
@@ -133,6 +147,6 @@ public class PresidentListFragment extends Fragment {
         presidentAdapter.notifyDataSetChanged();
         ApplicationData.getInstance().getPresidentItem();
         Toast.makeText(PresidentListFragment.this.getContext(),"Ajouté",Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
 }

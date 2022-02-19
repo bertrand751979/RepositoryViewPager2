@@ -15,16 +15,16 @@ import com.example.repositoryviewpager2.viewHolder.PresidentViewHolder;
 import java.util.ArrayList;
 
 public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder> {
-    private ArrayList<President>listPresidents;
-    private OnImageCancelClickedAction onImageCancelClickedAction;
+    public ArrayList<President>listPresidents = new ArrayList<>();
+    public OnImageCancelClickedAction onImageCancelClickedAction;
 
-    public PresidentAdapter(ArrayList<President> listPresidents, OnImageCancelClickedAction onImageCancelClickedAction) {
-        this.listPresidents = listPresidents;
+    public PresidentAdapter(OnImageCancelClickedAction onImageCancelClickedAction) {
         this.onImageCancelClickedAction = onImageCancelClickedAction;
     }
 
     public void setListPresidents(ArrayList<President> listPresidents) {
         this.listPresidents = listPresidents;
+        notifyDataSetChanged();
     }
 
     @NonNull
