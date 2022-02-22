@@ -3,7 +3,6 @@ package com.example.repositoryviewpager2;
 
 import android.util.Log;
 
-import com.example.repositoryviewpager2.fragment.PresidentListFragment;
 import com.example.repositoryviewpager2.model.President;
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ public class ApplicationData {
     private President presidentSortItem;
     public ArrayList<President>mySearchingList = new ArrayList<>();
     public ArrayList<President> myPresidentList = new ArrayList<>();
+    public String searchValue;
 
 
     private ApplicationData() {
@@ -58,9 +58,15 @@ public class ApplicationData {
         myPresidentList.remove(president);
     }
 
+    public String getSearchValue() {
+        return searchValue;
+    }
 
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
 
-    public void searchChoice(String countryName) {
+/*public void searchChoice(String countryName) {
         mySearchingList.clear();
         if (countryName.equals("")) {
             return;
@@ -73,8 +79,20 @@ public class ApplicationData {
                     Log.d("List2 ", String.valueOf(mySearchingList.size()));
                 }
         }
+    }*/
+
+    public boolean searchCountry(String researchCountry) {
+        boolean searchResult =false;
+        mySearchingList.clear();
+        for(President countrySearch: ApplicationData.getInstance().myPresidentList){
+            Log.d("nom",countrySearch.getPresidentCountry());
+            if(countrySearch.getPresidentCountry().equalsIgnoreCase(researchCountry)){
+                searchResult = true;
+                mySearchingList.add(countrySearch);
+
+            }
+        }
+        return searchResult;
     }
-
-
 
 }

@@ -12,9 +12,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.repositoryviewpager2.fragment.CountrySelectionPresidentFragmentViewModel;
-import com.example.repositoryviewpager2.model.President;
-
-import java.util.ArrayList;
 
 public class MyAlertDialogFragment extends DialogFragment {
     public static EditText mEditText;
@@ -56,6 +53,7 @@ public class MyAlertDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 if(done==view){
                     viewModelSearch.searchChoice(mEditText.getText().toString());
+                    ApplicationData.getInstance().setSearchValue(mEditText.getText().toString());
                     Toast.makeText(MyAlertDialogFragment.this.getContext(),"le mot"+mEditText.getText().toString(),Toast.LENGTH_SHORT).show();
                     dismiss();
                 }

@@ -62,6 +62,7 @@ public class PresidentListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //mettre a jour la liste
         presidentAdapter.setListPresidents(ApplicationData.getInstance().myPresidentList);
 
     }
@@ -83,7 +84,7 @@ public class PresidentListFragment extends Fragment {
         btnToAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModelPresident.toAdd(new President(editPresidentName.getText().toString(),editPresidentCountry.getText().toString()));
+                viewModelPresident.addPresident(new President(editPresidentName.getText().toString(),editPresidentCountry.getText().toString()));
                 Toast.makeText(PresidentListFragment.this.getContext(),"Ajouté",Toast.LENGTH_SHORT).show();
             }
         });
@@ -95,20 +96,23 @@ public class PresidentListFragment extends Fragment {
         OnImageCancelClickedAction onImageCancelClickedAction = new OnImageCancelClickedAction() {
             @Override
             public void deleteItem(President president) {
-                viewModelPresident.toDeleted(president);
+                viewModelPresident.deletedPresident(president);
                 Toast.makeText(PresidentListFragment.this.getContext(),"Supprimé",Toast.LENGTH_SHORT).show();
             }
         };
-        viewModelPresident.toPostMyListPresident();
+        //gerer les donnes du recyclerview
         presidentAdapter = new PresidentAdapter(onImageCancelClickedAction);
+        //lie l'adapteur au recyclerView
         recyclerView.setAdapter(presidentAdapter);
+        //Mise en place de l'observer qui ecoute les changement sur la liste des president
         viewModelPresident.presidentLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<President>>() {
             @Override
             public void onChanged(ArrayList<President> presidents) {
+                //des qu'i y a un changement on met a jour la list president
                 presidentAdapter.setListPresidents(presidents);
             }
         });
-        viewModelPresident.toPostMyListPresident();
+        viewModelPresident.publishPresidentList();
     }
 
     @Override
@@ -132,6 +136,7 @@ public class PresidentListFragment extends Fragment {
         return (super.onOptionsItemSelected(item));
     }
 
+    //affiche le pop up
     private void showAlertDialog() {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         MyAlertDialogFragment alertDialog = MyAlertDialogFragment.newInstance("Some title");
